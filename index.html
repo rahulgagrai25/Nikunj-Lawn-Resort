@@ -71,7 +71,7 @@
             opacity: 0.7;
         }
 
-        /* Navbar Styles */
+        /* Navbar Styles - UPDATED */
         .navbar {
             position: fixed;
             top: 0;
@@ -83,6 +83,7 @@
             padding: 1.5rem 5%;
             z-index: 1000;
             transition: background 0.3s ease;
+            background: rgba(26, 26, 46, 0.95); /* Always have a background for visibility */
         }
 
         .navbar.scrolled {
@@ -140,6 +141,7 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 1001;
         }
 
         /* Hero Section */
@@ -235,7 +237,7 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Booking Bar */
+        /* Booking Bar - UPDATED FOR MOBILE */
         .booking-bar {
             position: absolute;
             bottom: 40px;
@@ -847,7 +849,7 @@
             }
         }
 
-        /* Mobile Menu */
+        /* Mobile Menu - UPDATED */
         .mobile-menu {
             position: fixed;
             top: 0;
@@ -900,7 +902,13 @@
             color: var(--luxury-gold);
         }
 
-        /* Responsive Styles */
+        /* Responsive Styles - UPDATED */
+        @media (max-width: 1200px) {
+            .slide-content h1 {
+                font-size: 3.5rem;
+            }
+        }
+
         @media (max-width: 1024px) {
             .about-content,
             .dining-item,
@@ -912,11 +920,34 @@
             .dining-item:nth-child(even) {
                 flex-direction: column;
             }
+            
+            .slide-content h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .booking-bar {
+                flex-direction: column;
+                width: 90%;
+                bottom: 20px;
+                padding: 1rem;
+            }
+
+            .booking-input {
+                width: 100%;
+            }
+
+            .booking-btn {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
         }
 
         @media (max-width: 768px) {
             .navbar {
                 padding: 1rem 5%;
+                background: rgba(26, 26, 46, 0.95); /* Solid background on mobile */
             }
 
             .nav-left, .nav-right {
@@ -939,23 +970,84 @@
             .slide-content h1 {
                 font-size: 2.5rem;
             }
-
-            .booking-bar {
-                flex-direction: column;
-                width: 90%;
-                bottom: 20px;
+            
+            .slide-content p {
+                font-size: 1rem;
             }
-
-            .booking-input {
-                width: 100%;
-            }
-
-            .booking-btn {
-                width: 100%;
+            
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
             }
 
             section {
                 padding: 4rem 5%;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title p {
+                font-size: 0.9rem;
+            }
+            
+            .about-text h3, .dining-text h3 {
+                font-size: 1.5rem;
+            }
+            
+            .room-details h3, .activity-details h3, .offer-details h3 {
+                font-size: 1.2rem;
+            }
+            
+            .contact-info h3 {
+                font-size: 1.5rem;
+            }
+            
+            .footer-content {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide-content h1 {
+                font-size: 2rem;
+            }
+            
+            .slide-content p {
+                font-size: 0.9rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .booking-bar {
+                position: relative;
+                margin: 2rem auto;
+                transform: none;
+                left: auto;
+                width: 95%;
+            }
+            
+            .hero {
+                padding-bottom: 380px; /* Make space for the booking bar */
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-item {
+                height: 200px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-links {
+                justify-content: center;
             }
         }
     </style>
@@ -1467,6 +1559,15 @@
         menuClose.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
             document.body.style.overflow = 'auto';
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
         });
 
         // Smooth scrolling for anchor links
