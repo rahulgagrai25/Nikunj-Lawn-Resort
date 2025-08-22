@@ -105,8 +105,8 @@
             align-items: center;
             padding: 1.5rem 5%;
             z-index: 1000;
-            transition: background 0.3s ease;
-            background: rgba(26, 26, 46, 0.95); /* Always have a background for visibility */
+            transition: background 0.3s ease, padding 0.3s ease;
+            background: rgba(26, 26, 46, 0.95);
         }
 
         .navbar.scrolled {
@@ -165,20 +165,25 @@
             font-size: 1.5rem;
             cursor: pointer;
             z-index: 1001;
+            background: none;
+            border: none;
         }
 
-        /* Hero Section */
+        /* Hero Section - UPDATED FOR MOBILE */
         .hero {
             height: 100vh;
             width: 100%;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .hero-slides {
             height: 100%;
             width: 100%;
             position: relative;
+            flex: 1;
         }
 
         .slide {
@@ -261,12 +266,16 @@
         }
 
         /* Booking Bar - UPDATED FOR MOBILE */
+        .booking-container {
+            position: relative;
+            width: 100%;
+            padding: 0 5%;
+            margin-top: 20px;
+            z-index: 10;
+        }
+
         .booking-bar {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
+            width: 100%;
             max-width: 1000px;
             background: rgba(26, 26, 46, 0.85);
             backdrop-filter: blur(10px);
@@ -277,7 +286,7 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
-            z-index: 10;
+            margin: 0 auto;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(224, 192, 151, 0.3);
         }
@@ -788,7 +797,8 @@
         }
 
         .footer-logo img {
-            height: 60px;
+            align-self: center;
+            height: 80px;
             margin-bottom: 1rem;
         }
 
@@ -903,6 +913,8 @@
             color: white;
             font-size: 2rem;
             cursor: pointer;
+            background: none;
+            border: none;
         }
 
         .mobile-nav {
@@ -953,9 +965,10 @@
         @media (max-width: 900px) {
             .booking-bar {
                 flex-direction: column;
-                width: 90%;
-                bottom: 20px;
+                width: 100%;
                 padding: 1rem;
+                position: relative;
+                margin: 2rem auto;
             }
 
             .booking-input {
@@ -966,12 +979,22 @@
                 width: 100%;
                 margin-top: 0.5rem;
             }
+            
+            .hero {
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .booking-container {
+                position: static;
+                padding: 0 5% 2rem;
+            }
         }
 
         @media (max-width: 768px) {
             .navbar {
                 padding: 1rem 5%;
-                background: rgba(26, 26, 46, 0.95); /* Solid background on mobile */
+                background: rgba(26, 26, 46, 0.95);
             }
 
             .nav-left, .nav-right {
@@ -1031,31 +1054,34 @@
             .footer-content {
                 gap: 2rem;
             }
+            
+            .hero-slides {
+                height: 70vh;
+            }
         }
 
         @media (max-width: 480px) {
             .slide-content h1 {
                 font-size: 2rem;
+                margin-bottom: 0.5rem;
             }
             
             .slide-content p {
                 font-size: 0.9rem;
+                margin-bottom: 1.5rem;
             }
             
             .section-title h2 {
                 font-size: 1.8rem;
             }
             
-            .booking-bar {
-                position: relative;
-                margin: 2rem auto;
-                transform: none;
-                left: auto;
-                width: 95%;
+            .section-title {
+                margin-bottom: 2rem;
             }
             
-            .hero {
-                padding-bottom: 380px; /* Make space for the booking bar */
+            .booking-bar {
+                margin: 1rem auto;
+                width: 100%;
             }
             
             .gallery-grid {
@@ -1072,6 +1098,23 @@
             
             .social-links {
                 justify-content: center;
+            }
+            
+            .room-features {
+                justify-content: center;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-icon {
+                margin-bottom: 0.5rem;
+            }
+            
+            .hero-slides {
+                height: 60vh;
             }
         }
     </style>
@@ -1096,16 +1139,16 @@
             <a href="#packages" class="nav-link">Packages</a>
             <a href="#contact" class="nav-link">Contact</a>
         </div>
-        <div class="menu-toggle">
+        <button class="menu-toggle">
             <i class="fas fa-bars"></i>
-        </div>
+        </button>
     </nav>
 
     <!-- Mobile Menu -->
     <div class="mobile-menu">
-        <div class="mobile-menu-close">
+        <button class="mobile-menu-close">
             <i class="fas fa-times"></i>
-        </div>
+        </button>
         <ul class="mobile-nav">
             <li><a href="#about">About</a></li>
             <li><a href="#facilities">Facilities</a></li>
@@ -1142,39 +1185,41 @@
             </div>
         </div>
 
-        <!-- Booking Bar -->
-        <div class="booking-bar">
-            <div class="booking-input">
-                <label for="check-in">Event Date</label>
-                <input type="date" id="check-in">
+        <!-- Booking Bar Container -->
+        <div class="booking-container">
+            <div class="booking-bar">
+                <div class="booking-input">
+                    <label for="check-in">Event Date</label>
+                    <input type="date" id="check-in">
+                </div>
+                <div class="booking-input">
+                    <label for="event-type">Event Type</label>
+                    <select id="event-type">
+                        <option value="wedding">Wedding</option>
+                        <option value="reception">Reception</option>
+                        <option value="corporate">Corporate Event</option>
+                        <option value="other">Other Celebration</option>
+                    </select>
+                </div>
+                <div class="booking-input">
+                    <label for="guests">Guests</label>
+                    <select id="guests">
+                        <option value="50">50 Guests</option>
+                        <option value="100" selected>100 Guests</option>
+                        <option value="200">200 Guests</option>
+                        <option value="300">300+ Guests</option>
+                    </select>
+                </div>
+                <div class="booking-input">
+                    <label for="venue">Venue Preference</label>
+                    <select id="venue">
+                        <option value="lawn" selected>Outdoor Lawn</option>
+                        <option value="indoor">Indoor Banquet</option>
+                        <option value="both">Both Venues</option>
+                    </select>
+                </div>
+                <button class="booking-btn">Check Availability</button>
             </div>
-            <div class="booking-input">
-                <label for="event-type">Event Type</label>
-                <select id="event-type">
-                    <option value="wedding">Wedding</option>
-                    <option value="reception">Reception</option>
-                    <option value="corporate">Corporate Event</option>
-                    <option value="other">Other Celebration</option>
-                </select>
-            </div>
-            <div class="booking-input">
-                <label for="guests">Guests</label>
-                <select id="guests">
-                    <option value="50">50 Guests</option>
-                    <option value="100" selected>100 Guests</option>
-                    <option value="200">200 Guests</option>
-                    <option value="300">300+ Guests</option>
-                </select>
-            </div>
-            <div class="booking-input">
-                <label for="venue">Venue Preference</label>
-                <select id="venue">
-                    <option value="lawn" selected>Outdoor Lawn</option>
-                    <option value="indoor">Indoor Banquet</option>
-                    <option value="both">Both Venues</option>
-                </select>
-            </div>
-            <button class="booking-btn">Check Availability</button>
         </div>
     </section>
 
@@ -1467,7 +1512,7 @@
         <div class="footer-content">
             <div class="footer-about">
                 <div class="footer-logo">
-                    <img src="https://via.placeholder.com/150x60/ffffff/1A1A2E?text=NIKUNJ'S+BYARA" alt="Nikunj's Byara Logo">
+                    <img src="ChatGPT Image Aug 21, 2025, 03_15_35 PM-Photoroom.png" alt="Nikunj's Byara Logo">
                 </div>
                 <p>Nikunj's Byara Lawns and Resort offers an unparalleled experience for luxury weddings and events in the heart of Jaipur, Rajasthan.</p>
                 <div class="social-links">
@@ -1570,7 +1615,7 @@
         // Change slide every 5 seconds
         setInterval(nextSlide, 5000);
 
-        // Mobile menu toggle
+        // Mobile menu toggle - FIXED
         const menuToggle = document.querySelector('.menu-toggle');
         const mobileMenu = document.querySelector('.mobile-menu');
         const menuClose = document.querySelector('.mobile-menu-close');
