@@ -918,7 +918,7 @@
             background: var(--luxury-gold);
         }
 
-        .footer-links {
+        .footer-links ul {
             list-style: none;
         }
 
@@ -1196,6 +1196,20 @@
             
             .hero-slides {
                 height: 60vh;
+            }
+        }
+
+        @media (max-width: 590px) {
+            .footer-links {
+                text-align: center;
+            }
+
+            .footer-heading:after {
+                display: none;
+            }
+
+            .social-links{
+                justify-content: center;
             }
         }
     </style>
