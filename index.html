@@ -265,6 +265,7 @@
             transition: opacity 1s ease;
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -752,7 +753,7 @@
 
         .offer-price {
             display: flex;
-            align-items: center;
+            align-items: media;
             gap: 1rem;
             margin-bottom: 1rem;
         }
@@ -995,6 +996,7 @@
         .mobile-nav {
             list-style: none;
             text-align: center;
+            margin-top: 2rem;
         }
 
         .mobile-nav li {
@@ -1011,6 +1013,13 @@
 
         .mobile-nav a:hover {
             color: var(--luxury-gold);
+        }
+
+        /* Navbar Mobile Controls - NEW STYLES */
+        .nav-mobile-controls {
+            display: none;
+            align-items: center;
+            gap: 1rem;
         }
 
         /* Responsive Styles - UPDATED */
@@ -1080,6 +1089,10 @@
 
             .nav-left, .nav-right {
                 display: none;
+            }
+
+            .nav-mobile-controls {
+                display: flex;
             }
 
             .menu-toggle, .search-toggle {
@@ -1197,6 +1210,14 @@
             .hero-slides {
                 height: 60vh;
             }
+            
+            .nav-mobile-controls {
+                gap: 0.7rem;
+            }
+            
+            .search-toggle, .menu-toggle {
+                font-size: 1.3rem;
+            }
         }
 
         @media (max-width: 590px) {
@@ -1234,12 +1255,16 @@
             <a href="#packages" class="nav-link">Packages</a>
             <a href="#contact" class="nav-link">Contact</a>
         </div>
-        <button class="search-toggle">
-            <i class="fas fa-search"></i>
-        </button>
-        <button class="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </button>
+        
+        <!-- Mobile Controls - Search now comes before menu -->
+        <div class="nav-mobile-controls">
+            <button class="search-toggle">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </nav>
 
     <!-- Mobile Booking Bar -->
